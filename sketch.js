@@ -1,5 +1,10 @@
 let m = 0;
 let c = 100;
+let sone;
+
+function preload(){
+    sone = loadImage("sone.png");
+}
 
 function setup(){
     createCanvas(1400,900);
