@@ -55,6 +55,7 @@ var dxi;
 var dxii;
 var dxiii;
 var j;
+var b;
 let ci = [];
 let cn = 0;
 let cb = 0;
@@ -65,13 +66,17 @@ let ccb = 0;
 let ccbp = [];
 let hl = 0;
 let chl = [];
+let wm = 0;
+let wb = 0;
+let ww = 0;
+let cw = [];
 
 function preload(){
     const names = [
         "si","sii","siii","siv","sv","svi","svii","sviii","six","sx","sxi","sxii","sxiii",
         "qi","qii","qiii","qiv","qv","qvi","qvii","qviii","qix","qx","qxi","qxii","qxiii",
         "hi","hii","hiii","hiv","hv","hvi","hvii","hviii","hix","hx","hxi","hxii","hxiii",
-        "di","dii","diii","div","dv","dvi","dvii","dviii","dix","dx","dxi","dxii","dxiii","j"
+        "di","dii","diii","div","dv","dvi","dvii","dviii","dix","dx","dxi","dxii","dxiii","j","b"
     ];
     names.forEach(name => {
         const img = loadImage(`${name}.png`);
@@ -119,6 +124,7 @@ function draw(){
         fill(0,0,0)
         text("Q=ブラックジャック",100,150);
         text("W=ハイアンドロー",100,250);
+        text("E=カジノウォー",100,350);
     }
 
     if(g == 2){
@@ -470,6 +476,20 @@ function draw(){
         }   
     }
 
+    if(wm == 1){
+        if(m == 1){
+            image(b,100,600,200,300);
+            image(b,400,600,200,300);
+            image(b,700,600,200,300);
+            image(b,1000,600,200,300);
+            text("F",180,600);
+            text("G",480,600);
+            text("H",780,600);
+            text("J",1080,600);
+            text("K=スタート",100,150)
+        }
+    }
+
     if(m == 3){
         fill(100,0,0);
         textSize(100);
@@ -670,6 +690,7 @@ function keyPressed(){
                 hl = 0;
             }
         }
+        wm = 0;
     }
 
     if(m == 0){
@@ -695,6 +716,9 @@ function keyPressed(){
                 usedValues.push(ci[0]);
                 chl[0] = ci[0] - (13 * floor((ci[0] - 1) / 13));
                 cn = 1;
+            }
+            if(g == 3){
+                wm = 1;
             }
         }
     }
@@ -780,6 +804,108 @@ function keyPressed(){
                 }
             }
         }
+        if(g == 3){
+            if(key == "f"){
+                wb = 0;
+            }
+            if(key == "g"){
+                wb = 2;
+            }
+            if(key == "h"){
+                wb = 4;
+            }
+            if(key == "j"){
+                wb = 6;
+            }
+            if(key == "k"){
+                c -= bc;
+                const usedValues = [];
+                cn = 10;
+                ci[0] = getRandomUniqueCardValue(usedValues);
+                usedValues.push(ci[0]);
+                cw[0] = ci[0] - (13 * floor((ci[0] - 1) / 13));
+                if(cw[0] == 1){
+                    cw[0] = 14;
+                }
+                ci[2] = getRandomUniqueCardValue(usedValues);
+                usedValues.push(ci[2]);
+                cw[2] = ci[2] - (13 * floor((ci[2] - 1) / 13));
+                if(cw[2] == 1){
+                    cw[2] = 14;
+                }
+                ci[4] = getRandomUniqueCardValue(usedValues);
+                usedValues.push(ci[4]);
+                cw[4] = ci[4] - (13 * floor((ci[4] - 1) / 13));
+                if(cw[4] == 1){
+                    cw[4] = 14;
+                }
+                ci[6] = getRandomUniqueCardValue(usedValues);
+                usedValues.push(ci[6]);
+                cw[6] = ci[6] - (13 * floor((ci[6] - 1) / 13));
+                if(cw[6] == 1){
+                    cw[6] = 14;
+                }
+                if(cw[0] > cw[2] && cw[0] > cw[4] && cw[0] > cw[6]){
+                    ww = 0;
+                }
+                if(cw[2] > cw[0] && cw[2] > cw[4] && cw[2] > cw[6]){
+                    ww = 2;
+                }
+                if(cw[4] > cw[2] && cw[4] > cw[0] && cw[4] > cw[6]){
+                    ww = 4;
+                }
+                if(cw[6] > cw[2] && cw[6] > cw[4] && cw[6] > cw[0]){
+                    ww = 6;
+                }
+                if(wb == 0 && cw[0] == cw[2] && cw[0] > cw[4] && cw[0] > cw[6]){
+                    ww = 5;
+                }
+                if(wb == 0 && cw[0] > cw[2] && cw[0] == cw[4] && cw[0] > cw[6]){
+                    ww = 5;
+                }
+                if(wb == 0 && cw[0] > cw[2] && cw[0] > cw[4] && cw[0] == cw[6]){
+                    ww = 5;
+                }
+                if(wb == 2 && cw[2] == cw[0] && cw[2] > cw[4] && cw[2] > cw[6]){
+                    ww = 5;
+                }
+                if(wb == 2 && cw[2] > cw[0] && cw[2] == cw[4] && cw[2] > cw[6]){
+                    ww = 5;
+                }
+                if(wb == 2 && cw[2] > cw[0] && cw[2] > cw[4] && cw[2] == cw[6]){
+                    ww = 5;
+                }
+                if(wb == 4 && cw[4] == cw[2] && cw[4] > cw[0] && cw[4] > cw[6]){
+                    ww = 5;
+                }
+                if(wb == 4 && cw[4] > cw[2] && cw[4] == cw[0] && cw[4] > cw[6]){
+                    ww = 5;
+                }
+                if(wb == 4 && cw[4] > cw[2] && cw[4] > cw[0] && cw[4] == cw[6]){
+                    ww = 5;
+                }
+                if(wb == 6 && cw[6] == cw[2] && cw[6] > cw[4] && cw[6] > cw[0]){
+                    ww = 5;
+                }
+                if(wb == 6 && cw[6] > cw[2] && cw[6] == cw[4] && cw[6] > cw[0]){
+                    ww = 5;
+                }
+                if(wb == 6 && cw[6] > cw[2] && cw[6] > cw[4] && cw[6] == cw[0]){
+                    ww = 5;
+                }
+                if(ww == 5){
+                    m = 5;
+                    c += bc;
+                } else {
+                    if(wb == ww){
+                        m = 3;
+                        c += bc * 2;
+                    } else {
+                        m = 4;
+                    }
+                }
+            }
+        }
     }
 
     if(key == "q"){
@@ -791,6 +917,11 @@ function keyPressed(){
 
     if(key == "w"){
         g = 2;
+        bc = 10;
+    }
+
+    if(key == "e"){
+        g = 3;
         bc = 10;
     }
 }
