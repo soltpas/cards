@@ -92,13 +92,27 @@ function draw(){
     text("賭け金: " + bc + "枚",400,50)
 
     if(m == 0){
-        fill(0,0,0)
-        text("賭けフェーズ",700,50);
+        if(g != 0){
+            fill(0,0,0)
+            text("賭けフェーズ",700,50);
+            text("A=スタート",100,150);
+            text("↑=賭け金＋１",100,250);
+            text("↓=賭け金＋１",100,350);
+        }
     }
 
     if(m == 1){
         fill(0,0,0)
         text("ゲームフェーズ",700,50);
+        if(g == 1){
+            text("F=ヒット",100,150);
+            text("J=スタンド",100,250);
+        }
+        if(g == 2){
+            text("F=ハイ",100,150);
+            text("J=ロー",100,250);
+            text("Z=ホーム",100,350);
+        }
     }
 
     if(g == 0){
@@ -460,18 +474,27 @@ function draw(){
         fill(100,0,0);
         textSize(100);
         text("YOU WIN",700,150);
+        fill(0,0,0);
+        textSize(50);
+        text("Z=ホーム",100,150);
     }
 
     if(m == 4){
         fill(0,0,100);
         textSize(100);
         text("YOU LOSE",700,150);
+        fill(0,0,0);
+        textSize(50);
+        text("Z=ホーム",100,150);
     }
 
     if(m == 5){
         fill(0,100,0);
         textSize(100);
         text("DRAW",700,150);
+        fill(0,0,0);
+        textSize(50);
+        text("Z=ホーム",100,150);
     }
 
     if(g == 1){
